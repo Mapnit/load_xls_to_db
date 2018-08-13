@@ -1,0 +1,29 @@
+<bulk-load>
+    <target-db type="mssql" name="gisdb">
+        <server>gis-db-03.vss.lcl</server>
+        <database>HenryRes</database>
+        <username>sde</username>
+        <password>logicadmin</password>
+    </target-db>
+    <source-folder type="xlsx" name="drilling">
+        <path>C:\Users\Chen.Liang\Projects\notebook</path>
+    </source-folder>
+    <load-map>
+        <source>
+            <file name="Gwendolyn #2612LB Daily Drilling Report.xlsx"/>
+            <tab-names expr="Report\s*\(\d+\)"/>
+            <header-range from="A17" to="E17"/>
+            <data-range from="A18" to="E43"/>
+        </source>
+        <target>
+            <table name="dbo.Activity_Log"/>
+        </target>
+        <columns>
+            <column source="From" target="ts_from" type="datetime"/>
+            <column source="To" target="ts_to" type="datetime"/>
+            <column source="Hours" target="to_hours" type="number"/>
+            <column source="Op Code" target="op_code" type="text"/>
+            <column source="Activity for Previous 24 Hours" target="activity" type="text"/>
+        </columns>
+    </load-map>
+</bulk-load>

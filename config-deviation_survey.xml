@@ -1,0 +1,36 @@
+<bulk-load>
+    <target-db type="mssql" name="gisdb">
+        <server>gis-db-03.vss.lcl</server>
+        <database>HenryRes</database>
+        <username>sde</username>
+        <password>logicadmin</password>
+    </target-db>
+    <source-folder type="xlsx" name="drilling">
+        <path>C:\Users\Chen.Liang\Projects\notebook</path>
+    </source-folder>
+    <load-map>
+        <source>
+            <file name="Gwendolyn #2612LB Daily Drilling Report.xlsx"/>
+            <tab-names name="Report\s*\(\d+\)"/>
+            <header-range from="J3" to="R3"/>
+            <data-range from="J4" to="R15"/>
+            <anchors>
+				<anchor name="Well Name" at="B1"/>
+			</anchors>
+        </source>
+        <target>
+            <table name="dbo.Deviation_Survey"/>
+        </target>
+        <columns>
+            <column source="Well Name" target="Well_Name" type="text" role="anchor"/>
+            <column source="MD" target="MD" type="number"/>
+            <column source="TVD" target="TVD" type="number"/>
+            <column source="Angle" target="Angle" type="number"/>
+            <column source="Azimuth" target="Azimuth" type="number"/>
+            <column source="+N/-S" target="Delta_NS" type="number"/>
+            <column source="+E/-W" target="Delta_EW" type="number"/>
+            <column source="Closure D" target="Closure_D" type="number"/>
+            <column source="Closure A" target="Closure_A" type="number"/>
+        </columns>
+    </load-map>
+</bulk-load>

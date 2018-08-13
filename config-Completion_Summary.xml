@@ -1,0 +1,47 @@
+<bulk-load>
+    <target-db type="mssql" name="testdb">
+        <server>(localdb)\MSSQLLocalDB</server>
+        <database>HenryRes</database>
+        <username>sde</username>
+        <password>logicadmin</password>
+    </target-db>
+    <source-folder type="xlsx" name="drilling">
+        <path>C:\Users\Chen.Liang\Projects\notebook\HenryRes</path>
+    </source-folder>
+    <load-map>
+        <source>
+            <file name=".*Completion\sReport.*\.xlsx"/>
+            <tab-names name="Data\sSummary"/>
+            <header-range from="A4" to="R4"/>
+            <data-range from="A5" to="R5+"/>
+			<anchors>
+				<anchor name="Well Name" at="A1"/>
+			</anchors>
+        </source>
+        <target>
+            <table name="dbo.Completion_Summary"/>
+        </target>
+        <columns>
+			<column source="Well Name" target="Well_Name" type="text" role="anchor"/>
+            <column source="Stage Number" target="Stage_Number" type="number"/>
+            <column source="Heel Cluster" target="Heel_Cluster" type="number"/>
+            <column source="Toe Cluster" target="Toe_Cluster" type="number"/>
+            <column source="CF Vol (gals)" target="CF_Vol_gals" type="number"/>
+            <column source="Total BLTR" target="Total_BLTR" type="number"/>
+            <column source="Prop Cum (lbs)" target="Prop_Cum_lbs" type="number"/>
+            <column source="100 Mesh" target="Mesh_100" type="number"/>
+            <column source="30/50 White" target="White_30_50" type="number"/>
+            <column source="40/70 White" target="White_40_70" type="number"/>
+            <column source="Proppant 3" target="Proppant_3" type="number"/>
+			<column source="Proppant 4" target="Proppant_4" type="number"/>
+			<column source="Open Press" target="Open_Press" type="number"/>
+			<column source="Fm BD Press" target="Fm_BD_Press" type="number"/>
+			<column source="ISIP" target="ISIP" type="number"/>
+			<column source="Frac Grad" target="Frac_Grad" type="number"/>
+			<column source="Max Rate" target="Max_Rate" type="number"/>
+			<column source="Avg Rate" target="Avg_Rate" type="number"/>
+			<column source="Max Press" target="Max_Press" type="number"/>
+			<column source="Avg Press" target="Avg_Press" type="number"/>
+        </columns>
+    </load-map>
+</bulk-load>
